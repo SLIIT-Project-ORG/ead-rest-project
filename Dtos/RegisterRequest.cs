@@ -2,21 +2,31 @@
 
 namespace ead_rest_project.Dtos
 {
-	public class RegisterRequest
+    public class RegisterRequest
 	{
-		[Required,EmailAddress]
-		public string Email { get; set; } = string.Empty;
-		[Required]
-	public string UserName { get; set; } = string.Empty;
-
-		[Required]
-		public string FullName { get; set; } = string.Empty;
-
-		[Required,DataType(DataType.Password)]
-		public string Password { get; set; } = string.Empty;
-
-		[Required, DataType(DataType.Password),Compare(nameof(Password),ErrorMessage ="Password do not match")]
-		public string ConfirmPassword {  get; set; } = string.Empty;
-
-	}
+        [Required]
+        public string firstName { get; set; }
+        [Required]
+        public string lastName { get; set; }
+        [Required]
+        public string username { get; set; }
+        [Required]
+        public string email { get; set; }
+        [Required]
+        public string mobileNo { get; set; }
+        [Required]
+        public string password { get; set; }
+        [Required]
+        public string nic { get; set; }
+        [Required]
+        public string gender { get; set; }
+        [Required]
+        public int age { get; set; }
+        [Required]
+        public string imageRef { get; set; }
+        [Required]
+        public string description { get; set; }
+        [Required]
+        public int roleId { get; set; }
+    }
 }

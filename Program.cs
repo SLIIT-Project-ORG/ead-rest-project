@@ -13,6 +13,7 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+/*
 // Add services to the container.
 //sachini
 BsonSerializer.RegisterSerializer(new GuidSerializer(MongoDB.Bson.BsonType.String));
@@ -29,7 +30,8 @@ var mongoDbIdentityConfig = new MongoDbIdentityConfiguration
 
 		DatabaseName = "ead-db"
 	},
-    IdentityOptionsAction = Options =>
+   
+   IdentityOptionsAction = Options =>
     {
         Options.Password.RequireDigit = false;
         Options.Password.RequiredLength = 8;
@@ -41,6 +43,7 @@ var mongoDbIdentityConfig = new MongoDbIdentityConfiguration
         Options.Lockout.MaxFailedAccessAttempts = 5;
         Options.User.RequireUniqueEmail = true;
     }
+   
 };
 
 builder.Services.ConfigureMongoDbIdentity<ApplicationUser, ApplicationRole, Guid>(mongoDbIdentityConfig)
@@ -75,11 +78,9 @@ builder.Services.AddAuthentication(x =>
     };
 });
 
+*/
 
-
-
-
-
+//Train
 // Add services to the container.
 builder.Services.Configure<TrainStoreDatabaseSettings>(
     builder.Configuration.GetSection(nameof(TrainStoreDatabaseSettings)));
@@ -91,6 +92,21 @@ builder.Services.AddSingleton<IMongoClient>(s =>
     new MongoClient(builder.Configuration.GetValue<string>("TrainStoreDatabaseSettings:ConnectionString")));
 
 builder.Services.AddScoped<ITrainService, TrainService>();
+
+
+//User
+// Add services to the container.
+builder.Services.Configure<AuthStoreDatabaseSettings>(
+    builder.Configuration.GetSection(nameof(AuthStoreDatabaseSettings)));
+
+builder.Services.AddSingleton<AuthStoreDatabaseSettings>(sp =>
+    sp.GetRequiredService<IOptions<AuthStoreDatabaseSettings>>().Value);
+
+builder.Services.AddSingleton<IMongoClient>(s =>
+    new MongoClient(builder.Configuration.GetValue<string>("AuthStoreDatabaseSettings:ConnectionString")));
+
+builder.Services.AddScoped<IAuthService, AuthService>();
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
