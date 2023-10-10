@@ -112,7 +112,7 @@ namespace ead_rest_project.services
             trainDetails.trainTypeId = train.trainTypeId;
             trainDetails.isActive = train.isActive;
 
-            _trains.FindOneAndReplace(id, trainDetails);
+            _trains.FindOneAndReplaceAsync(id, trainDetails);
             Console.WriteLine("Train Details Updated..");
         }
         public void DeleteTrain(string id)
