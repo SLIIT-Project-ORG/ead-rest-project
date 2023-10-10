@@ -6,22 +6,24 @@ using System.Net;
 
 namespace ead_rest_project.Controllers
 {
-    [ApiController]
+	[ApiController]
 	[Route("api/v1/authenticate")]
 	public class AuthenticationController : ControllerBase
 	{
 		private readonly IAuthService iAuthService;
-        public AuthenticationController() { 
+		public AuthenticationController(IAuthService iAuthService)
+		{
+			this.iAuthService = iAuthService;
 		}
 
 		//Add Role
-		[HttpPost]
+	/*	[HttpPost]
 		[Route("roles/add")]
 		public async Task<IActionResult> CreateRole([FromBody] CreateRoleRequest request)
 		{
 			return null;
 		}
-
+	*/
 
 
 		// Register Method
@@ -31,7 +33,7 @@ namespace ead_rest_project.Controllers
 		public ActionResult<RegisterResponse> Register([FromBody] RegisterRequest request)
 		{
 			return iAuthService.createUser(request);
-        }
+		}
 
 
 		//Login Method
@@ -42,5 +44,5 @@ namespace ead_rest_project.Controllers
 		{
 			return iAuthService.login(request);
 		}
-
-};
+	}
+}
