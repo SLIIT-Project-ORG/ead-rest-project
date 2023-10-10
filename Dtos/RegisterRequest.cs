@@ -1,22 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace ead_rest_project.Dtos
+﻿namespace ead_rest_project.Dtos
 {
-	public class RegisterRequest
+    public class RegisterRequest
 	{
-		[Required,EmailAddress]
-		public string Email { get; set; } = string.Empty;
-		[Required]
-	public string UserName { get; set; } = string.Empty;
-
-		[Required]
-		public string FullName { get; set; } = string.Empty;
-
-		[Required,DataType(DataType.Password)]
-		public string Password { get; set; } = string.Empty;
-
-		[Required, DataType(DataType.Password),Compare(nameof(Password),ErrorMessage ="Password do not match")]
-		public string ConfirmPassword {  get; set; } = string.Empty;
-
-	}
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public string username { get; set; }
+        public string email { get; set; }
+        public string mobileNo { get; set; }
+        public string password { get; set; }
+        public string nic { get; set; }
+        public string gender { get; set; }
+        public int age { get; set; }
+        public string imageRef { get; set; }
+        public string description { get; set; }
+        public int roleId { get; set; }
+    }
 }

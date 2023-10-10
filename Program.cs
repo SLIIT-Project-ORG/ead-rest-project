@@ -2,6 +2,7 @@ using AspNetCore.Identity.MongoDbCore.Extensions;
 using AspNetCore.Identity.MongoDbCore.Infrastructure;
 using ead_rest_project.Models;
 using ead_rest_project.services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -73,9 +74,6 @@ builder.Services.AddAuthentication(x =>
 
     };
 });
-
-
-
 
 
 
