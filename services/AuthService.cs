@@ -18,48 +18,49 @@ namespace ead_rest_project.services
 
         public RegisterResponse createUser(RegisterRequest request)
         {
-            if (request.nic == null || request.nic.Equals("")){
+            if (request.nic == null || request.nic.Equals(""))
+            {
                 throw new Exception("NIC cannot be null");
             }
 
-            Optional<ApplicationUser> user = null;
-            user = _users.Find(User => User.nic == request.nic).FirstOrDefault();
-            if(user.HasValue == true)
+            List<ApplicationUser> userList = _users.Find(ApplicationUser => true).ToList();
+            foreach (ApplicationUser user in userList)
             {
-                throw new Exception("User already exist for given NIC");
+                if (user.nic.Equals(request.nic))
+                {
+                    throw new Exception($"{user.nic} was already in the system.");
+                }
             }
-            else
+
+            ApplicationUser applicationUser = new ApplicationUser();
+            applicationUser.firstName = request.firstName;
+            applicationUser.lastName = request.lastName;
+            applicationUser.username = request.username;
+            applicationUser.email = request.email;
+            applicationUser.mobileNo = request.mobileNo;
+            applicationUser.nic = request.nic;
+            applicationUser.gender = request.gender;
+            applicationUser.age = request.age;
+            applicationUser.imageRef = request.imageRef;
+            applicationUser.description = request.description;
+            applicationUser.isActive = true;
+            applicationUser.roleId = request.roleId;
+
+            string hashPassword = BCrypt.Net.BCrypt.HashPassword(request.password);
+            applicationUser.password = hashPassword;
+
+            try
             {
-                ApplicationUser applicationUser = new ApplicationUser();
-                applicationUser.firstName = request.firstName;
-                applicationUser.lastName = request.lastName;
-                applicationUser.username = request.username;
-                applicationUser.email = request.email;
-                applicationUser.mobileNo = request.mobileNo;
-                applicationUser.nic = request.nic;
-                applicationUser.gender = request.gender;
-                applicationUser.age = request.age;
-                applicationUser.imageRef = request.imageRef;
-                applicationUser.description = request.description;
-                applicationUser.isActive = true;
-                applicationUser.roleId = request.roleId;
-
-                string hashPassword = BCrypt.Net.BCrypt.HashPassword(request.password);
-                applicationUser.password = hashPassword;
-
-                try
-                {
-                    _users.InsertOne(applicationUser);
-                    Console.WriteLine("New User Created..");
-                    RegisterResponse registerResponse = new RegisterResponse();
-                    registerResponse.Success = true;
-                    registerResponse.Message = "New User Created";
-                    return registerResponse;
-                }
-                catch (DbException e)
-                {
-                    throw new Exception(e.Message);
-                }
+                _users.InsertOne(applicationUser);
+                Console.WriteLine("New User Created..");
+                RegisterResponse registerResponse = new RegisterResponse();
+                registerResponse.Success = true;
+                registerResponse.Message = "New User Created";
+                return registerResponse;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
 
