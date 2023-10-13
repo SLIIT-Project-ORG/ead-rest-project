@@ -1,4 +1,13 @@
-﻿using MongoDB.Bson;
+﻿/*
+ Developed       : Sachini Rasanga (IT20046552)
+ Function        : User Management
+ Component Type  : Model Class
+ Filename        : ApplicationUser.cs
+ Usage           : For represent the DB object
+*/
+
+
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDbGenericRepository.Attributes;
 

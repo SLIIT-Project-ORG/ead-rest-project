@@ -1,4 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿/*
+ Developed       : Sachini Rasanga (IT20046552)
+ Function        : User Management
+ Component Type  : Dto
+ Filename        : RegisterRequest.cs
+ Usage           : For request
+*/
+
+
+using System.ComponentModel.DataAnnotations;
 
 namespace ead_rest_project.Dtos
 {

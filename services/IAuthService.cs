@@ -1,6 +1,13 @@
-﻿using ead_rest_project.Dtos;
+﻿/*
+ Developed       : Sachini Rasanga (IT20046552)
+ Function        : User Management
+ Component Type  : Service interface
+ Filename        : IAuthService.cs
+ Usage           : For define methods
+*/
+
+using ead_rest_project.Dtos;
 using ead_rest_project.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace ead_rest_project.services
 {
