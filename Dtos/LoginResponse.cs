@@ -1,4 +1,12 @@
-﻿namespace ead_rest_project.Dtos
+﻿/*
+ Developed       : Sachini Rasanga (IT20046552)
+ Function        : User Management
+ Component Type  : Dto
+ Filename        : RegisterResponse.cs
+ Usage           : For response
+*/
+
+namespace ead_rest_project.Dtos
 {
 	public class LoginResponse
 	{
