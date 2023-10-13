@@ -1,4 +1,12 @@
-﻿using ead_rest_project.Models;
+﻿/*
+ Developed       : Tharuka Gayashan (IT20186906)
+ Function        : Train Management
+ Component Type  : Service interface
+ Filename        : ITrainService.cs
+ Usage           : For define methods
+*/
+
+using ead_rest_project.Models;
 using MongoDB.Driver;
 
 namespace ead_rest_project.services

@@ -1,4 +1,12 @@
-﻿using MongoDB.Bson;
+﻿/*
+ Developed       : Tharuka Gayashan (IT20186906)
+ Function        : Train Management
+ Component Type  : Model class
+ Filename        : Train.cs
+ Usage           : For represent the Database object
+*/
+
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 namespace ead_rest_project.Models
 {
