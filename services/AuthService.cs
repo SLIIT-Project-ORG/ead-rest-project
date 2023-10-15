@@ -35,59 +35,68 @@ namespace ead_rest_project.services
         //Create user method implementation
         public RegisterResponse createUser(RegisterRequest request)
         {
-            //Check NIC is null or empty
-            if (request.nic == null || request.nic.Equals(""))
-            {
-                throw new Exception("NIC cannot be null");
-            }
-
-            //Get all the users from user collection
-            List<ApplicationUser> userList = _users.Find(ApplicationUser => true).ToList();
-            foreach (ApplicationUser user in userList)
-            {
-                //Checking if there is already a user for the given NIC
-                if (user.nic.Equals(request.nic))
-                {
-                    throw new Exception($"{user.nic} was already in the system.");
-                }
-            }
-
-            //Create new applicatonUser object for save to DB
-            ApplicationUser applicationUser = new ApplicationUser();
-            applicationUser.firstName = request.firstName;
-            applicationUser.lastName = request.lastName;
-            applicationUser.username = request.username;
-            applicationUser.email = request.email;
-            applicationUser.mobileNo = request.mobileNo;
-            applicationUser.nic = request.nic;
-            applicationUser.gender = request.gender;
-            applicationUser.age = request.age;
-            applicationUser.imageRef = request.imageRef;
-            applicationUser.description = request.description;
-            applicationUser.isActive = true;
-            applicationUser.roleId = request.roleId;
-
-            //Password encryption using BCrypt
-            string hashPassword = BCrypt.Net.BCrypt.HashPassword(request.password);
-            //Set encrypted password to applicationUser object
-            applicationUser.password = hashPassword;
-
             try
             {
-                //save applicationUser object to DB
-                _users.InsertOne(applicationUser);
-                Console.WriteLine("New User Created..");
-                //Set response message and success status
-                RegisterResponse registerResponse = new RegisterResponse();
-                registerResponse.Success = true;
-                registerResponse.Message = "New User Created";
-                //return
-                return registerResponse;
-            }
-            catch (Exception e)
+                //Check NIC is null or empty
+                if (request.nic == null || request.nic.Equals(""))
+                {
+                    throw new Exception("NIC cannot be null");
+                }
+
+                //Get all the users from user collection
+                List<ApplicationUser> userList = _users.Find(ApplicationUser => true).ToList();
+                foreach (ApplicationUser user in userList)
+                {
+                    //Checking if there is already a user for the given NIC
+                    if (user.nic.Equals(request.nic))
+                    {
+                        throw new Exception($"{user.nic} was already in the system.");
+                    }
+                }
+
+                //Create new applicatonUser object for save to DB
+                ApplicationUser applicationUser = new ApplicationUser();
+                applicationUser.firstName = request.firstName;
+                applicationUser.lastName = request.lastName;
+                applicationUser.username = request.username;
+                applicationUser.email = request.email;
+                applicationUser.mobileNo = request.mobileNo;
+                applicationUser.nic = request.nic;
+                applicationUser.gender = request.gender;
+                applicationUser.age = request.age;
+                applicationUser.imageRef = request.imageRef;
+                applicationUser.description = request.description;
+                applicationUser.isActive = true;
+                applicationUser.roleId = request.roleId;
+
+                //Password encryption using BCrypt
+                string hashPassword = BCrypt.Net.BCrypt.HashPassword(request.password);
+                //Set encrypted password to applicationUser object
+                applicationUser.password = hashPassword;
+
+                try
+                {
+                    //save applicationUser object to DB
+                    _users.InsertOne(applicationUser);
+                    Console.WriteLine("New User Created..");
+                    //Set response message and success status
+                    RegisterResponse registerResponse = new RegisterResponse();
+                    registerResponse.Success = true;
+                    registerResponse.Message = "New User Created";
+                    //return
+                    return registerResponse;
+                }
+                catch (Exception e)
+                {
+                    //Exception handle using try catch
+                    throw new Exception(e.Message);
+                }
+            }catch(Exception e)
             {
-                //Exception handle using try catch
-                throw new Exception(e.Message);
+                RegisterResponse response = new RegisterResponse();
+                response.Message = e.Message;
+                response.Success = false;
+                return response;
             }
         }
 
