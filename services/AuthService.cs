@@ -261,13 +261,21 @@ namespace ead_rest_project.services
                 //If user exist
                 ResponseDto responseDto = new ResponseDto();
                 //Set isActive boolean to true
-                user.isActive = true;
+                if (user.isActive == true)
+                {
+                    user.isActive = false;
+                    responseDto.Message = "User De-activated";
+                }
+                else
+                {
+                    user.isActive = true;
+                    responseDto.Message = "User Re-activated";
+                }
                 //Save updated user details
                 _users.FindOneAndReplaceAsync(userId, user);
 
                 //Set message and success status to response
                 responseDto.Success = true;
-                responseDto.Message = "User re-activated";
                 return responseDto;
             }
         }
