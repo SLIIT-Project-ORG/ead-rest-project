@@ -33,12 +33,16 @@ builder.Services.AddSingleton<IMongoClient>(s =>
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 
+string[] origins = [];
+
+origins = ["http://localhost:3000"];
+
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
         builder
-            .WithOrigins("https://ead-rest-api.onrender.com")
+            .WithOrigins(origins)
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
