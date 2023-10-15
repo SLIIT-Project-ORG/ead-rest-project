@@ -33,16 +33,12 @@ builder.Services.AddSingleton<IMongoClient>(s =>
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 
-string[] origins = [];
-
-origins = ["http://localhost:3000"];
-
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
         builder
-            .WithOrigins(origins)
+            .WithOrigins("http://localhost:3000")
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
