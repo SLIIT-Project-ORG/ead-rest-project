@@ -274,7 +274,7 @@ namespace ead_rest_project.services
                     responseDto.Message = "User Re-activated";
                 }
                 //Save updated user details
-                _users.FindOneAndReplaceAsync(userId, user);
+                _users.FindOneAndReplaceAsync(T => T.userId == userId, user);
 
                 //Set message and success status to response
                 responseDto.Success = true;
