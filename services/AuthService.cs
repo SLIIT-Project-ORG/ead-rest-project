@@ -153,6 +153,7 @@ namespace ead_rest_project.services
                 AccessToken = accessToken,
                 Email = user.email,
                 UserId = user.userId,
+                RoleId = user.roleId,
                 Message = "Login successful"
             };
         }
