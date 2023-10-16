@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /*
     Developed   : V.G.A.P.Kumara (IT20068578)
     Function    : Train Reservation
@@ -8,8 +8,6 @@
 
 using AspNetCore.Identity.MongoDbCore.Extensions;
 using AspNetCore.Identity.MongoDbCore.Infrastructure;
-=======
->>>>>>> origin/development
 using ead_rest_project.Models;
 using ead_rest_project.services;
 using Microsoft.Extensions.Options;
@@ -45,7 +43,6 @@ builder.Services.AddSingleton<IMongoClient>(s =>
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 
-<<<<<<< HEAD
 //Booking
 builder.Services.Configure<BookingStoreDatabaseSettings>(
     builder.Configuration.GetSection(nameof(BookingStoreDatabaseSettings)));
@@ -57,7 +54,6 @@ builder.Services.AddSingleton<IMongoClient>(s =>
     new MongoClient(builder.Configuration.GetValue<string>("BookingStoreDatabaseSettings:ConnectionString")));
 
 builder.Services.AddScoped<IBookingService, BookingService>();
-=======
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
@@ -68,8 +64,6 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod();
     });
 });
-
->>>>>>> origin/development
 
 
 builder.Services.AddControllers();
