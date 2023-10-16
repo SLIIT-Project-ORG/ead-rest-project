@@ -1,4 +1,11 @@
-﻿
+﻿/*
+ Developed       : Sachini Rasanga (IT20046552)
+ Function        : User Management
+ Component Type  : Controller class
+ Filename        : AuthenticationController.cs
+ Usage           : For define API endpoints
+*/
+
 using ead_rest_project.Dtos;
 using ead_rest_project.Models;
 using ead_rest_project.services;
@@ -11,15 +18,19 @@ namespace ead_rest_project.Controllers
 	[Route("api/v1")]
 	public class AuthenticationController : ControllerBase
 	{
-		private readonly IAuthService iAuthService;
+        //Read only instance from IAuthService
+        private readonly IAuthService iAuthService;
+		
+		//Constructor
 		public AuthenticationController(IAuthService iAuthService)
 		{
 			this.iAuthService = iAuthService;
 		}
 
 
-		// Register Method
-		[HttpPost]
+        // Register Method (POST Request)
+        //Endpoint => {BASE-URL}/api/v1/authenticate/register
+        [HttpPost]
 		[Route("/authenticate/register")]
 		public ActionResult<RegisterResponse> Register([FromBody] RegisterRequest request)
 		{
@@ -27,8 +38,9 @@ namespace ead_rest_project.Controllers
 		}
 
 
-		//Login Method
-		[HttpPost]
+        //Login Method (POST Request)
+        //Endpoint => {BASE-URL}/api/v1/authenticate/login
+        [HttpPost]
 		[Route("/authenticate/login")]
 		[ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(LoginResponse))]
 		public ActionResult<LoginResponse> Login([FromBody] LoginRequest request)
@@ -37,14 +49,19 @@ namespace ead_rest_project.Controllers
 		}
 
 
-		[HttpGet]
+        //Get all user Method (GET Request)
+        //Endpoint => {BASE-URL}/api/v1/user/all
+        [HttpGet]
 		[Route("/user/all")]
 		public ActionResult<List<ApplicationUser>> getAllUsers()
 		{
 			return iAuthService.getAllUsers();
         }
 
-		[HttpGet]
+
+        //Get user by ID Method (GET Request)
+        //Endpoint => {BASE-URL}/api/v1/user/{userId}
+        [HttpGet]
 		[Route("/user/{userId}")]
 		public ActionResult<ApplicationUser> getUser(String userId)
 		{
@@ -52,7 +69,10 @@ namespace ead_rest_project.Controllers
 
         }
 
-		[HttpPut]
+
+        //Update user account Method (PUT Request)
+        //Endpoint => {BASE-URL}/api/v1/user/reactivate/{userId}
+        [HttpPut]
 		[Route("/user/reactivate/{userId}")]
 		public ActionResult<ResponseDto> reActivateUser(String userId)
 		{

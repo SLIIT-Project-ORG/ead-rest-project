@@ -1,52 +1,69 @@
-﻿using ead_rest_project.Models;
+﻿/*
+ Developed       : Tharuka Gayashan (IT20186906)
+ Function        : Train Management
+ Component Type  : Controller
+ Filename        : TrainController.cs
+ Usage           : For define API endpoints
+*/
+
+
+using ead_rest_project.Models;
 using ead_rest_project.services;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ead_rest_project.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/train")]
     [ApiController]
     public class TrainController : ControllerBase
     {
 
+        //Read only instance from ITrainService
         private readonly ITrainService trainService;
 
+        //Constructor
         public TrainController(ITrainService trainService) {
             this.trainService = trainService;
         }
 
-        // GET: api/<TrainController>
+
+        //Train get all method (GET Request)
+        //Endpoint => {BASE-URL}/api/v1/train
         [HttpGet]
         public ActionResult<List<Train>> GetGetAllTrains()
         {
             return trainService.GetAllTrains();
         }
 
-        // GET api/<TrainController>/5
+
+        //Train get by ID method (GET Request)
+        //Endpoint => {BASE-URL}/api/v1/train/{id}
         [HttpGet("{id}")]
         public ActionResult<Optional<Train>> GetGetTrainById(string id)
         {
             return trainService.GetTrainById(id);
         }
 
-        // POST api/<TrainController>
+        //Train create method (GET Request)
+        //Endpoint => {BASE-URL}/api/v1/train
         [HttpPost]
         public ActionResult<Train> CreateTrain([FromBody] Train train)
         {
             return trainService.CreateTrain(train);
         }
 
-        // PUT api/<TrainController>/5
+        //Update train method (PUT Request)
+        //Endpoint => {BASE-URL}/api/v1/train/{id}
         [HttpPut("{id}")]
         public void UpdateTrain(string id, [FromBody] Train train)
         {
             trainService.UpdateTrain(id,train);
         }
 
-        // DELETE api/<TrainController>/5
+        //Train delete method (DELETE Request)
+        //Endpoint => {BASE-URL}/api/v1/train/{id}
         [HttpDelete("{id}")]
         public void DeleteTrain(string id)
         {
