@@ -281,5 +281,33 @@ namespace ead_rest_project.services
                 return responseDto;
             }
         }
+
+        public void UpdateUser(string id, ApplicationUser applicationUser)
+        {
+            if(id == null || id.Equals("")){
+                throw new Exception("Id cannot be null");
+            }
+            _users.FindOneAndReplaceAsync(a => a.userId == id, applicationUser);
+            Console.WriteLine("User updated");
+        }
+
+        public void DeleteUser(string id)
+        {
+            if(id == null || id.Equals(""))
+            {
+                throw new Exception("Id cannot be null");
+            }
+            Optional<ApplicationUser> optUser = _users.Find(ApplicationUser => ApplicationUser.userId.Equals(id)).FirstOrDefault();
+            if (optUser.HasValue != true)
+            {
+                throw new Exception("User not found for given userId");
+            }
+            else
+            {
+                //If exist, Delete train by given trainId
+                _users.DeleteOne(ApplicationUser => ApplicationUser.userId.Equals(id));
+                Console.WriteLine("User details deleted..");
+            }
+        }
     }
 }

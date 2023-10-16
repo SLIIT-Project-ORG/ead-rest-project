@@ -18,5 +18,7 @@ namespace ead_rest_project.services
         List<ApplicationUser> getAllUsers();
         ApplicationUser getUser(string userId);
         ResponseDto reActivateUser(string userId);
+        void UpdateUser(string id, ApplicationUser applicationUser);
+        void DeleteUser(string id);
     }
 }
