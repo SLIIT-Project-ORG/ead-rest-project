@@ -8,6 +8,7 @@
 
 using BCrypt.Net;
 using ead_rest_project.Dtos;
+using ead_rest_project.enums;
 using ead_rest_project.Models;
 using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;
