@@ -179,18 +179,7 @@ namespace ead_rest_project.services
                 {
                     //If exist, Delete train by given trainId
                     _trains.DeleteOne(Train => Train.trainId.Equals(id));
-                    //Checking train deleted or not
-                    Optional<Train> checkTrain = _trains.Find(Train => Train.trainId.Equals(id)).FirstOrDefault();
-                    if (checkTrain.HasValue == true)
-                    {
-                        //delete request failed
-                        throw new Exception("Train delete request failed");
-                    }
-                    else
-                    {
-                        //Delete request successful
-                        Console.WriteLine("Train details deleted..");
-                    }
+                    Console.WriteLine("Train details deleted..");
                 }
             }
         }
