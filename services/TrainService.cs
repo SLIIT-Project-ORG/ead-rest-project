@@ -136,26 +136,8 @@ namespace ead_rest_project.services
                 throw new Exception("trainTypeId cannot be null");
             }
 
-            Optional<Train> optTrain = null;
-            //Checking train exist or not for given trainId
-            optTrain = _trains.Find(Train => Train.trainId == id).FirstOrDefault();
-            if (optTrain.HasValue != true)
-            {
-                throw new Exception("Train not found for given ID");
-            }
-
-            //Set optTrain details to trainObject
-            Train trainDetails = optTrain.Value;
-
-            //Set update request details to trainDetails object
-            trainDetails.trainName = train.trainName;
-            trainDetails.description = train.description;
-            trainDetails.capacity = train.capacity;
-            trainDetails.trainTypeId = train.trainTypeId;
-            trainDetails.isActive = train.isActive;
-
             //Saving updated train object to mongo DB
-            _trains.FindOneAndReplaceAsync(id, trainDetails);
+            _trains.FindOneAndReplaceAsync(t => t.trainId == id, train);
             Console.WriteLine("Train Details Updated..");
         }
 
