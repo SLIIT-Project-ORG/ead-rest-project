@@ -66,7 +66,6 @@ namespace ead_rest_project.Controllers
 		public ActionResult<ApplicationUser> getUser(String userId)
 		{
 			return iAuthService.getUser(userId);
-
         }
 
 
@@ -79,5 +78,17 @@ namespace ead_rest_project.Controllers
 			return iAuthService.reActivateUser(userId);
         }
 
-	}
+        [HttpPut("/user/{id}")]
+        public void UpdateTrain(string id, [FromBody] ApplicationUser applicationUser)
+        {
+            iAuthService.UpdateUser(id, applicationUser);
+        }
+
+        [HttpDelete("/user/{id}")]
+        public void DeleteUser(string id)
+        {
+            iAuthService.DeleteUser(id);
+        }
+
+    }
 }
