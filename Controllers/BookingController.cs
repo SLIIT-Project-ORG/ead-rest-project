@@ -25,6 +25,7 @@ namespace ead_rest_project.Controllers
         }
 
         // GET: api/<BookingController>
+        //Endpoint => {BASE-URL}/api/booking
         [HttpGet]
         public ActionResult<List<Booking>> GetGetAllBookings()
         {
@@ -32,6 +33,7 @@ namespace ead_rest_project.Controllers
         }
 
         // GET api/<BookingController>/
+        //Endpoint => {BASE-URL}/api/booking
         [HttpGet("{id}")]
         public ActionResult<Optional<Booking>> GetGetBookingById(string id)
         {
@@ -39,6 +41,7 @@ namespace ead_rest_project.Controllers
         }
 
         // POST api/<BookingController>
+        //Endpoint => {BASE-URL}/api/booking
         [HttpPost]
         public ActionResult<Booking> CreateBooking([FromBody] Booking booking)
         {
@@ -47,6 +50,7 @@ namespace ead_rest_project.Controllers
 
 
         // DELETE api/<BookingController>/
+        //Endpoint => {BASE-URL}/api/booking
         [HttpDelete("{id}")]
         public void DeleteBooking(string id)
         {

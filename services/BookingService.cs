@@ -24,17 +24,10 @@ namespace ead_rest_project.services
         //Create a booking and submit booking details
         public Booking CreateBooking(Booking booking)
         {
-            if (booking.FromStation == null || booking.FromStation.Equals(""))
-            {
-                throw new Exception("FromStation cannot be null or empty");
-            }
-            if (booking.ToStation == null)
-            {
-                throw new Exception("ToStation cannot be null");
-            }
+            
             if (booking.BookingDate == null || booking.BookingDate.Equals(""))
             {
-                throw new Exception("DepatureDate cannot be null or empty");
+                throw new Exception("Booking Date cannot be null or empty");
             }
             if(booking.Class == null)
             {
@@ -44,7 +37,7 @@ namespace ead_rest_project.services
             {
                 throw new Exception("NumTickets cannot be null");
             }
-            if(booking.isAvailablity == null)
+            if(booking.Availablity == null)
             {
                 throw new Exception("isAvailability cannot be null");
             }

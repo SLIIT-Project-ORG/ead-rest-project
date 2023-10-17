@@ -16,20 +16,26 @@ namespace ead_rest_project.Models
             [BsonId]
             [BsonRepresentation(BsonType.ObjectId)]
             public string BookingId { get; set; }= String.Empty;
+            [BsonElement("bookingNo")]
+            public string BookingNo { get; set; } = String.Empty;
             [BsonElement("fromStation")]
             public string FromStation { get; set; }= String.Empty;
             [BsonElement("toStation")]
             public string ToStation { get; set; }= String.Empty;
+            [BsonElement("trainDate")]
+            public DateTime TrainDate { get; set; }
+            [BsonElement("trainTime")]
+            public DateTime TrainTime { get; set; }
             [BsonElement("bookingDate")]
             public DateTime BookingDate { get; set; }
             [BsonElement("class")]
-            public string Class { get; set; }= String.Empty;
+            public int Class { get; set; }
             [BsonElement("numTickets")]
             public int NumTickets { get; set; }
             [BsonElement("availability")]
-            public bool isAvailablity { get; set; }
+            public string Availablity { get; set; }
             [BsonElement("totalCost")]
-            public decimal TotalCost { get; set; }
+            public int TotalCost { get; set; }
         }
 
 }
